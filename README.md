@@ -13,23 +13,23 @@ This document covers instruction on how to run the integration of gene co-expres
 ## Usage ##
 Step 1. Open Matlab program and enter:
 
-  >> initCobraToolbox;
+    >> initCobraToolbox;
 
 at Matlab command line.
 
 Step 2. Read SBML model
 
-  >> model = readCbModel('model_name');
+    >> model = readCbModel('model_name');
 
 Step 3. Read gene expression data
 
-  >> [exp txt] = xlsread('gene_expression_profile_file.csv');
+    >> [exp txt] = xlsread('gene_expression_profile_file.csv');
 
   Where exp is the numeric value of gene expression data in gene_expression_profile_file.csv file and txt is text data in gene_expression_profile_file.csv. Numeric values in inner spreadsheet rows and columns appear as empty character vectors in txt.
 
 Step 4. Perform analysis
 
-  >> solution = comm(model, exp, txt, condition, threshold);
+    >> solution = comm(model, exp, txt, condition, threshold);
 
   The algorithm of integration of co-expression network and metabolic model is completed by using function comm where the input is model file in step2, exp and txt in step 3 and row vector of condition that are wanted to calculate flux distribution (default is all conditions) and threshold for constructing co-expression network (default value is 0.9).
 
