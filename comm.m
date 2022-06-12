@@ -125,7 +125,7 @@ for i=1:length(model.rxns)
     end
 end
 
-% process gene expression data based on GPR association
+%process gene expression data based on GPR association
 gene_exdat=zeros(length(modelIrrev.genes),1);
 nupb=zeros(length(modelIrrev.rules),size(exp,2));
 for ch=1:size(exp,2)
