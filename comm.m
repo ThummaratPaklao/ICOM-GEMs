@@ -122,7 +122,7 @@ for i=1:length(model.rxns)
     if length(rev2irrev{i,1})==2
         Re(i,rev2irrev{i,1}(2))=1/2;
         Re(rev2irrev{i,1}(2),i)=1/2;
-    end
+        end
 end
 
 %process gene expression data based on GPR association
