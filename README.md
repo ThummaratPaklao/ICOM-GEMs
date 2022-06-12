@@ -11,5 +11,5 @@ This document covers instruction on how to run the integration of gene co-expres
 
 ## Usage ##
 Step 1. Open Matlab program and enter
-  >> initCobraToolbox
+  >> initCobraToolbox;
 at Matlab command line.
