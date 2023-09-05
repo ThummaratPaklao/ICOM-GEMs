@@ -5,7 +5,7 @@ function solution = ICONGEMs(model,exp,txt1,condition,threashold)
 %
 % USAGE:
 %
-%    solution = comm(model,exp,txt1,threashold,condition)
+%    solution = ICONGEMs(model,exp,txt1,threashold,condition)
 %
 % INPUTS:
 %
