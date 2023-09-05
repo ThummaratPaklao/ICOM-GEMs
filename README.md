@@ -29,7 +29,7 @@ Step 3. Read gene expression data
 
 Step 4. Perform analysis
 
-    >> solution = comm(model, exp, txt, condition, threshold);
+    >> solution = ICONGEMs(model, exp, txt, condition, threshold);
 
   The algorithm of integration of co-expression network and metabolic model is completed by using function comm where the input is model file in step2, exp and txt in step 3 and row vector of condition that are wanted to calculate flux distribution (default is all conditions) and threshold for constructing co-expression network (default value is 0.9).
 
