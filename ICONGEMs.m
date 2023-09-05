@@ -1,4 +1,4 @@
-function solution = comm(model,exp,txt1,condition,threashold)
+function solution = ICONGEMs(model,exp,txt1,condition,threashold)
 % Use this algorithm to integrate a co-expression network and genome scale 
 % metabolic model. This algorithm calculate the reaction flux distribution
 % in each condition by applying quadratic programming.
