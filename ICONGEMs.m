@@ -1,11 +1,11 @@
-function solution = ICONGEMs(model,exp,txt1,condition,threashold)
+function solution = ICONGEMs(model,exp,txt1,condition,threashold,alpha)
 % Use this algorithm to integrate a co-expression network and genome scale 
 % metabolic model. This algorithm calculate the reaction flux distribution
 % in each condition by applying quadratic programming.
 %
 % USAGE:
 %
-%    solution = ICONGEMs(model,exp,txt1,threashold,condition)
+%    solution = ICONGEMs(model,exp,txt1,condition,threashold,alpha)
 %
 % INPUTS:
 %
@@ -21,7 +21,8 @@ function solution = ICONGEMs(model,exp,txt1,condition,threashold)
 %    condition:           row vector of number of condition corresponding 
 %                         condition in exp
 %                         (default value - 1:size(exp,2))
-%
+%    alpha:               The value for proportion of biomass (default value 1) 
+%                         
 % OUTPUTS:
 %    solution:             flux distribution table corresponding reaction
 %                          flux names
@@ -32,6 +33,9 @@ if nargin< 4 || isempty(condition)
 end
 if nargin< 5 ||isempty(threashold)
       threashold=0.9;
+end
+if nargin< 6 ||isempty(alpha)
+      alpha=0.99;
 end
 
 % construct the template model
@@ -82,16 +86,23 @@ for i =1:size(cor,1)
          end
     end
 end
+
 co_gene=cell(size(ind_cor_gene,1),2);
-co_gene(:,1)=txt2(ind_cor_gene(:,1),1);
-co_gene(:,2)=txt2(ind_cor_gene(:,2),1);
+co_gene(:,1)=geneincoexnet(ind_cor_gene(:,1),1);
+co_gene(:,2)=geneincoexnet(ind_cor_gene(:,2),1);
+
+Name_rxn={};
+for i=1:size(modelIrrev.genes)
+    [z1,Name_rxn{i}]=findRxnsFromGenes(modelIrrev, modelIrrev.genes(i,1),0,1);
+end
 
 %find reaction that satisfies gene 
 Name_cor_rxn={};
 for i=1:size(co_gene,1)
-    [z1,Name_cor_rxn{i,1}]=findRxnsFromGenes(modelIrrev, co_gene(i,1),1,1);
-    [z2,Name_cor_rxn{i,2}]=findRxnsFromGenes(modelIrrev, co_gene(i,2),1,1);
+    Name_cor_rxn{i,1}=Name_rxn{find(modelIrrev.genes==string(co_gene(i,1)))};
+    Name_cor_rxn{i,2}=Name_rxn{find(modelIrrev.genes==string(co_gene(i,2)))};
 end
+
 f=0;
 h=0;
 ind_cor_rxn=zeros(10,2);
@@ -120,8 +131,7 @@ end
 Re=zeros(size(R));
 for i=1:length(model.rxns)
     if length(rev2irrev{i,1})==2
-        Re(i,rev2irrev{i,1}(2))=1/2;
-        Re(rev2irrev{i,1}(2),i)=1/2;
+        Re(i,rev2irrev{i,1}(2))=1;
         end
 end
 
@@ -171,7 +181,6 @@ end
 end
 pos_nupb=nupb>=1000;
 nupb(pos_nupb)=max(nupb(~pos_nupb));
-nupb=filloutliers(nupb,'clip','mean',1);
 
 %construct table for reporting the result
 solution=table(model.rxns);
@@ -198,7 +207,7 @@ upb=[model3.ub; inf*ones(size(modelIrrev.rxns,1),1)];
 
 O=[zeros(size(R)) zeros(size(R)) ; zeros(size(R)) R]; 
 Aeq=[modelIrrev.S Trans0 ; S2 Trans2 ; Obj4]; 
-beq=[zeros(size(modelIrrev.mets,1),1); (-1)*ones(size(modelIrrev.rxns,1),1) ; 0.99*solution1.f];
+beq=[zeros(size(modelIrrev.mets,1),1); (-1)*ones(size(modelIrrev.rxns,1),1) ; alpha*solution1.f];
 
 model2=struct;
 model2.lb=lob;
