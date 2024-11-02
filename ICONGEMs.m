@@ -14,7 +14,6 @@ function [solICONGEMs, boundEf] = ICONGEMs(model, exp, genetxt, condition, thres
 %                     extract from gene expression profile file
 %    genetxt:         list of gene names that extract from gene expression profile
 %                     file
-%    numericFlag:     1 if using Human Recon  (Default = 0).
 %
 % OPTIONAL INPUTS:
 %    threshold:           The value of the correlation coefficient for constructing 
@@ -23,6 +22,7 @@ function [solICONGEMs, boundEf] = ICONGEMs(model, exp, genetxt, condition, thres
 %                         corresponding to the conditions in exp 
 %                         (default value: 1:size(exp, 2)).
 %    alpha:               The value for the proportion of biomass (default value: 1).
+%    numericFlag:         1 if using Human Recon  (Default = 0).
 %                         
 % OUTPUTS:
 %    solICONGEMs:             Flux distribution table corresponding to reaction flux names.
