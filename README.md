@@ -34,3 +34,8 @@ Step 4. Perform analysis
   The algorithm of integration of co-expression network and metabolic model is completed by using function ICONGEMs where the input is model file in step2, exp and txt in step 3 and row vector of condition that are wanted to calculate flux distribution (default is all conditions) and threshold for constructing co-expression network (default value is 0.9). The alpha value is the proportion of biomass (value in range (0,1]).Parameter numericFlag is 1 if using Human Recon  (Default = 0).
 
   After the algorithm is finished, solICONGEMs for the predicted metabolic fluxes will be added to the Workspace. Numerical flux values can be examined in more detail by double-clicking solICONGEMs. The boundEf is upperbound of E-flux method. Moreover, the output of this algorithm is reported in result.csv file.
+
+## Citation ##
+Paklao, T., Suratanee, A. & Plaimas, K. ICON-GEMs: integration of co-expression network in genome-scale metabolic models, shedding light through systems biology. BMC Bioinformatics 24, 492 (2023). https://doi.org/10.1186/s12859-023-05599-0
+
+
