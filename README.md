@@ -2,7 +2,7 @@
 Integration of gene co-expression network and metabolic network based on flux balance anaysis
 
 This document covers instruction on how to run the integration of gene co-expression network and metabolic model method in MATLAB.
-(Or you can access in CobraToolbox: https://opencobra.github.io/cobratoolbox/latest/modules/analysis/ICONGEMs/index.html )
+
 ## REQUIREMENTS ##
 1. Matlab (version 2018a or better)
 2. Cobra Toolbox
